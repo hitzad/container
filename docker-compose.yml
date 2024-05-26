@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+  db:
+    image: mysql:latest
+    container_name: mysql_container
+    environment:
+      MYSQL_ROOT_PASSWORD: root_password
+      MYSQL_DATABASE: example_db
+      MYSQL_USER: example_user
+      MYSQL_PASSWORD: example_password
+    ports:
+      - "9000:8080"
+    volumes:
+      - db_data:/var/lib/mysql
+
+  ubuntu:
+    image: ubuntu:latest
+    container_name: ubuntu_container
+    command: tail -f /dev/null  
+    ports:
+      - "8080:80"
+    volumes:
+      - ubuntu_data:/data
+
+volumes:
+  db_data:
+  ubuntu_data:
